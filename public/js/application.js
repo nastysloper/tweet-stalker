@@ -1,7 +1,22 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+  if ( window.location.pathname != '/' ) {
+    var username = (window.location.pathname).match(/\/(.*)/)[1];
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+    $.ajax({
+      type: 'get',
+      url: '/check_stale/' + username
+    }).done(function (response) {
+      console.log(response);
+      if ( response == 'true' ) {
+        $.ajax({
+          type: 'post',
+          url: '/get_tweets/' + username
+        }).done(function (tweets) {
+          $('#all-tweets').html(tweets);
+        });
+      }
+      $('img').css('display', 'none');
+      $('#all-tweets').css('display', 'inline-block');
+    });
+  }
 });

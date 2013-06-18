@@ -1,8 +1,8 @@
 <h3>All Recent Tweets from <%= @user.username %></h3>
 
-<ul>
-<% @user.tweets.order("tweet_time DESC").limit(10).each do |tweet| %>
-  <li>[<%= tweet.tweet_time %>] <%= tweet.tweet %></li>
-<%end%>
+<img src="loader.gif">
+
+<ul id="all-tweets" style="display: none;">
+  <%= erb :_tweet %>
 </ul>
 

@@ -13,7 +13,7 @@ class Twitteruser < ActiveRecord::Base
     return true if self.tweets.empty? 
     last_updated_time = self.tweets.last.updated_at
     minutes_since_last_fetch = (Time.now - last_updated_time) / 60
-    if minutes_since_last_fetch > 0
+    if minutes_since_last_fetch > 15
       self.tweets.destroy_all
       return true
     else

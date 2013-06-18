@@ -1,0 +1,3 @@
+<% @user.tweets.order("tweet_time DESC").limit(10).each do |tweet| %>
+  <li>[<%= tweet.tweet_time %>] <%= tweet.tweet %></li>
+<%end%>
